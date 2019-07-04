@@ -1,4 +1,5 @@
 import codes from "./pincode";
+import manualDistance from "./manualDistance";
 
 export const toRad = value => {
   const RADIANT_CONSTANT = 0.0174532925199433;
@@ -39,12 +40,19 @@ class PincodeDistance {
     return this.codes[pincode];
   }
   getDistance(toPincode, fromPincode) {
-    const toCoords = this.getlatLng(toPincode);
-    const fromCoords = this.getlatLng(fromPincode);
-    if(toPincode === fromPincode) {
-      return 1;
+    let distance = 1;
+    const doesExist = manualDistance[toPincode];
+    if(doesExist && doesExist[fromPincode]) {
+      distance = doesExist[fromPincode]
+    } else {
+      const toCoords = this.getlatLng(toPincode);
+      const fromCoords = this.getlatLng(fromPincode);
+      distance = calculategeoDistance(toCoords, fromCoords);
+      if(toPincode === fromPincode) {
+        distance = 1;
+      }
     }
-    return calculategeoDistance(toCoords, fromCoords)
+    return distance;
   }
 }
 export default PincodeDistance;

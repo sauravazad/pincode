@@ -1,10 +1,11 @@
 {
   "name": "pincode-distance",
   "version": "1.0.0",
+  "repository": "https://github.com/sauravazad/pincode",
   "description": "pincode lat lng  and distance for India",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node lib/test.js",
+    "test": "node test.js",
     "build": "babel src -e --source-maps --out-dir lib --copy-files --highlightCode"
   },
   "keywords": [
